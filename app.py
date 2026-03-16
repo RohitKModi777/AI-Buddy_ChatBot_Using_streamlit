@@ -4,7 +4,18 @@ load_dotenv()
 from langchain_google_genai import ChatGoogleGenerativeAI
 import streamlit as st
 
-llm = ChatGoogleGenerativeAI(model="chat-bison-001")
+import os
+
+# 1. Load API Key
+api_key = os.getenv("GOOGLE_API_KEY")
+
+# 2. Check if API Key exists
+if not api_key:
+    st.error("⚠️ GOOGLE_API_KEY is missing! Please add it to your Streamlit Secrets or .env file.")
+    st.stop()
+
+# 3. Initialize LLM
+llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash", google_api_key=api_key)
 
 st.title("🤖 AskBuddy - AI qnA Bot")
 st.markdown("My QnA Bot with Langchain and Google Gemini !")
