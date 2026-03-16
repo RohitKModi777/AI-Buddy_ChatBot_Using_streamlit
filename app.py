@@ -15,7 +15,7 @@ if not api_key:
     st.stop()
 
 # 3. Initialize LLM
-llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash", google_api_key=api_key)
+llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash-lite", google_api_key=api_key)
 
 st.title("🤖 AskBuddy - AI qnA Bot")
 st.markdown("My QnA Bot with Langchain and Google Gemini !")
