@@ -4,7 +4,7 @@ load_dotenv()
 from langchain_google_genai import ChatGoogleGenerativeAI
 import streamlit as st
 
-llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash")
+llm = ChatGoogleGenerativeAI(model="chat-bison-001")
 
 st.title("🤖 AskBuddy - AI qnA Bot")
 st.markdown("My QnA Bot with Langchain and Google Gemini !")
