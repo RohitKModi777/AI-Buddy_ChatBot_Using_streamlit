@@ -35,7 +35,11 @@ query = st.chat_input()
 if query:
     st.session_state.messages.append({"role":"user","content":query})
     st.chat_message("user").markdown(query)
-    res = llm.invoke(query)
-    st.chat_message("assistant").markdown(res.content)
-    st.session_state.messages.append({"role":"assistant","content":res.content})
+    try:
+        res = llm.invoke(query)
+        st.chat_message("assistant").markdown(res.content)
+        st.session_state.messages.append({"role":"assistant","content":res.content})
+    except Exception as e:
+        st.error(f"❌ AI Error: {str(e)}")
+        st.info("Check if your API Key is valid and if you have exceeded your quota on Google AI Studio.")
 
