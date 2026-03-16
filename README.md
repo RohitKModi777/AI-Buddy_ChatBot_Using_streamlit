@@ -14,6 +14,35 @@ A simple and interactive AI-powered ChatBot built using **Streamlit**, **Langcha
 - **LLM:** Google Gemini AI
 - **Environment Management:** Dotenv
 
+---
+
+## 🧠 End-to-End Code Explanation (Streamlit Functions)
+
+This project heavily relies on **Streamlit** to create the web interface. Here is a breakdown of the functions used:
+
+### 1. Header & Interface
+- **`st.title("🤖 AskBuddy")`**: Sets the main heading of the web page.
+- **`st.markdown(...)`**: Used for the subtitle and descriptions. It supports Markdown formatting (bold, links, etc.).
+
+### 2. State Management (Memory)
+- **`st.session_state`**: This is critical. Streamlit reruns the entire script every time a user interacts with a widget. We use `st.session_state["messages"]` to store the chat history so that the messages don't disappear when the page reloads.
+  - *Code snippet:* `if "messages" not in st.session_state: st.session_state["messages"] = []`
+
+### 3. Displaying the Chat
+- **`st.chat_message("role")`**: Creates a visual message box. We loop through the `session_state.messages` and use this to display previous chats.
+  - `role="user"`: Shows a user icon.
+  - `role="assistant"`: Shows the AI icon.
+
+### 4. Handling Input
+- **`st.chat_input()`**: Displays a sleek chat bar at the bottom. It waits for the user to type something and press Enter.
+- **The Input Logic**: 
+  1. When a `query` is entered, we append it to our "memory" (`session_state`).
+  2. We immediately display the user's message using `st.chat_message`.
+  3. We call the AI (`llm.invoke`) to get a response.
+  4. We display the AI's response and save it to the memory as well.
+
+---
+
 ## ⚙️ Setup & Installation
 
 ### 1. Clone the repository
@@ -45,9 +74,6 @@ streamlit run app.py
 1. Push your code to GitHub.
 2. Go to [share.streamlit.io](https://share.streamlit.io/).
 3. Connect your repo and deploy!
-
-### Deploying on Vercel
-*Note: Streamlit apps require a running server. For Vercel, you may need a wrapper or specialized configuration.*
 
 ---
 **Made with ❤️ as a student project.**
